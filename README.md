@@ -14,8 +14,7 @@ A simple web interface to download Spotify tracks using the [Song API](https://g
 3. Click download to get your MP3 file
 
 ## Live Demo
-[Try it here](#) (add your demo link when available)
-
+[Try it here](https://spotify-down-seven.vercel.app/)
 ## Related Projects
 - [Backend API](https://github.com/Soumyadeep765/song) - The Node.js API powering this web app
 
@@ -25,6 +24,3 @@ A simple web interface to download Spotify tracks using the [Song API](https://g
 
 ## Legal Note
 For educational purposes only. Please only download music you have rights to access.
-
-## License
-MIT
