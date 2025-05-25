@@ -618,29 +618,6 @@
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-
-        // Get the blob data
-        const blob = await response.blob();
-        
-        // Create download link
-        const blobUrl = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = blobUrl;
-        
-        // Set filename from track title or default
-        const trackTitle = document.getElementById('track-title').textContent || 'spotify_track';
-        a.download = `${trackTitle.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.mp3`;
-        
-        // Trigger download
-        document.body.appendChild(a);
-        a.click();
-        
-        // Clean up
-        setTimeout(() => {
-            document.body.removeChild(a);
-            URL.revokeObjectURL(blobUrl);
-        }, 100);
-        
     } catch (error) {
         console.error('Download error:', error);
         alert('Download failed. Please try again.');
