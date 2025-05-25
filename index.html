@@ -597,36 +597,47 @@
                 }
             });
         });
-        document.getElementById('track-download').addEventListener('click', async function(e) {
+        
+    </script>
+    <script>
+document.getElementById('track-download').addEventListener('click', function (e) {
     e.preventDefault();
-    const downloadUrl = this.getAttribute('href'); // Get the href attribute value
-    
+
+    const button = this;
+    const downloadUrl = button.getAttribute('href');
+
     if (!downloadUrl) {
         console.error('No download URL found');
         return;
     }
 
-    // Show loading state on button
-    const originalText = this.innerHTML;
-    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Preparing...';
-    this.disabled = true;
+    // Show loading state
+    const originalHTML = button.innerHTML;
+    button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Preparing...';
+    button.disabled = true;
+
+    // Create a temporary anchor to trigger download
+    const a = document.createElement('a');
+    a.href = downloadUrl;
+    a.setAttribute('download', ''); // optional: let browser determine the filename
+    a.style.display = 'none';
+
+    document.body.appendChild(a);
 
     try {
-        // Fetch the MP3 file
-        const response = await fetch(downloadUrl);
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
+        a.click();
     } catch (error) {
         console.error('Download error:', error);
         alert('Download failed. Please try again.');
     } finally {
-        // Reset button state
-        this.innerHTML = originalText;
-        this.disabled = false;
+        // Clean up
+        setTimeout(() => {
+            document.body.removeChild(a);
+            button.innerHTML = originalHTML;
+            button.disabled = false;
+        }, 300); // slightly increased timeout for better UX
     }
 });
-    </script>
+</script>
 </body>
 </html>
